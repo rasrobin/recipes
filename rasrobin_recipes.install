@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Creating the database structure for the module
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function rasrobin_recipes_schema() {
+  $schema['recipes'] = array(
+		'description' => 'A table for recipes',
+	    'fields' => array(
+	      'id' => array(
+	        'description' => 'The primary identifier for a recipe',
+	        'type' => 'int',
+	        'unsigned' => TRUE,
+	        'not null' => TRUE
+	      ),
+	    ),
+	  'primary_key' => array('id'),
+  );
+
+  return $schema;
+}
