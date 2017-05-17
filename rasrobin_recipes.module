@@ -15,10 +15,10 @@
  * @param arg 
  *   Array that holds the current path as returned from arg() function
  */
- function rasrobin_recipes_help($path, $arg) {
- 	switch ($path) {
-    case "admin/help#rasrobin_recipes":
-      return t("Show a form to add recipes"); 
-      break; 
+function rasrobin_recipes_help($path, $arg) {
+  switch ($path) {
+  case "admin/help#rasrobin_recipes":
+    return t("Show a form to add recipes"); 
+    break; 
   }
- }
+}
