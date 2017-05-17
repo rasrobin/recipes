@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * A module that allows you to add recipes in a form
+ */
+
+/**
+ * Implements hook_help().
+ *
+ * Displays help and module information.
+ *
+ * @param path 
+ *   Which path of the site we're using to display help
+ * @param arg 
+ *   Array that holds the current path as returned from arg() function
+ */
+ function rasrobin_recipes_help($path, $arg) {
+ 	switch ($path) {
+    case "admin/help#rasrobin_recipes":
+      return t("Show a form to add recipes"); 
+      break; 
+  }
+ }

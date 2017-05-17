@@ -1,0 +1,3 @@
+name = Rasrobin Recipes
+description = A demo-module for storing recipes.
+core = 7.x
