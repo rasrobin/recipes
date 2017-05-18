@@ -13,17 +13,66 @@ function rasrobin_recipes_schema() {
 		'description' => 'A table for recipes',
 	    'fields' => [
 	      'id' => [
-	        'description' => 'The primary identifier for a recipe',
 	        'type' => 'serial',
         	'unsigned' => TRUE,
         	'not null' => TRUE,
+        	'description' => 'Recipe id',
 	      ],
 	      'uid' => [
-			    'description' => 'User id',
 			    'type' => 'int',
 			    'not null' => TRUE,
 			    'default' => 0,
+			    'description' => 'User id',
 	      ],
+	      'title' => [
+	        'type' => 'varchar',
+	        'length' => 255,
+	        'not null' => TRUE,
+	        'description' => 'Reciple title.',
+	      ],
+	      'author_name' => [
+	        'type' => 'varchar',
+	        'length' => 255,
+	        'not null' => TRUE,
+	        'description' => 'Author name.',
+	      ],
+	      'author_email' => [
+	        'type' => 'varchar',
+	        'length' => 255,
+	        'not null' => TRUE,
+	        'description' => 'Author e-mail.',
+	      ],
+	      'description' => [
+	        'type' => 'text',
+	        'not null' => TRUE,
+	        'size' => 'normal',
+	        'description' => 'Recipe description.',
+	      ],
+	      'instructions' => [
+	        'type' => 'text',
+	        'not null' => TRUE,
+	        'size' => 'normal',
+	        'description' => 'Recipe instructions.',
+	      ],
+	      'ingredients' => [
+	        'type' => 'text',
+	        'not null' => TRUE,
+	        'size' => 'normal',
+	        'description' => 'Recipe ingredients.',
+	      ],
+	      'created_on' => [
+	        'type' => 'int',
+	        'not null' => TRUE,
+	        'default' => time(),
+	        'description' => 'created on timestamp',
+	      ],
+	      'language' => [
+	      	'type' => 'varchar',
+		    	'length' => 12,
+		    	'not null' => TRUE,
+		    	'default' => '',
+		    	'description' => 'site language on submit as ISO code',
+	    	],
 	    ],
 	  'primary key' => ['id'],
   ];
