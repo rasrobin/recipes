@@ -26,8 +26,8 @@ function rasrobin_recipes_help($path, $arg) {
 function rasrobin_recipes_menu() {
   $items = [];
 
-  $items['recipes/add-recipe'] = [ //this creates a URL that will call this form at "recipes/add-recipe"
-    'title' => 'Add a recipe', //page title
+  $items['recipe/add'] = [ //this creates a URL that will call this form at "recipes/add-recipe"
+    'title' => 'Submit a recipe', //page title
     'description' => 'Here you can add a recipe',
     'page callback' => 'drupal_get_form', //this is the function that will be called when the page is accessed.  for a form, use drupal_get_form
     'page arguments' => ['rasrobin_recipes_form_add'], //put the name of the form here
@@ -41,10 +41,52 @@ function rasrobin_recipes_menu() {
  * The form - add recipe form
  */
 function rasrobin_recipes_form_add($form, &$form_state) {
-  
+  $form['title'] = [
+    '#type' => 'textfield',
+    '#title' => 'recipe title',
+    '#size' => 20,
+    '#maxlength' => 255,
+    '#required' => TRUE, 
+  ];
+
+  $form['author_name'] = [
+    '#type' => 'textfield',
+    '#title' => 'Author name',
+    '#size' => 20,
+    '#maxlength' => 255,
+    '#required' => FALSE,
+  ];
+
+  $form['author_email'] = [
+    '#type' => 'textfield',
+    '#title' => 'Author e-mail',
+    '#size' => 20,
+    '#maxlength' => 255,
+    '#required' => TRUE,
+  ];
+
+  $form['description'] = [
+    '#type' => 'textarea',
+    '#title' => 'Recipe description',
+    '#maxlength' => 500,
+    '#required' => FALSE,
+  ];
+
+  $form['instructions'] = [
+    '#type' => 'textarea',
+    '#title' => 'Recipe instructions',
+    '#required' => FALSE,
+  ];
+
+  $form['ingredients'] = [
+    '#type' => 'textarea',
+    '#title' => 'Recipe ingredients',
+    '#required' => TRUE,
+  ];
+
   $form['submit_button'] = [
     '#type' => 'submit',
-    '#value' => t('Add!'),
+    '#value' => t('Submit recipe'),
   ];
   
   return $form;
