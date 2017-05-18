@@ -109,5 +109,11 @@ function rasrobin_recipes_form_add_validate($form, &$form_state) {
  * Submit - add recipe form
  */
 function rasrobin_recipes_form_add_submit($form, &$form_state) {
-	//
+	global $user; 
+  // Here u can insert Your custom form values into your custom table.
+  db_insert('_rasrobin_recipes')
+    ->fields([
+      'uid' => $user->uid,    
+    ])->execute();
+    drupal_set_message(t('successfully submitted your recipe'), 'status'); 
 }
