@@ -54,7 +54,7 @@ function rasrobin_recipes_form_add($form, &$form_state) {
     '#title' => 'Author name',
     '#size' => 20,
     '#maxlength' => 255,
-    '#required' => FALSE,
+    '#required' => TRUE,
   ];
 
   $form['author_email'] = [
@@ -69,13 +69,13 @@ function rasrobin_recipes_form_add($form, &$form_state) {
     '#type' => 'textarea',
     '#title' => 'Recipe description',
     '#maxlength' => 500,
-    '#required' => FALSE,
+    '#required' => TRUE,
   ];
 
   $form['instructions'] = [
     '#type' => 'textarea',
     '#title' => 'Recipe instructions',
-    '#required' => FALSE,
+    '#required' => TRUE,
   ];
 
   $form['ingredients'] = [
@@ -96,7 +96,13 @@ function rasrobin_recipes_form_add($form, &$form_state) {
  * Validate - add recipe form
  */
 function rasrobin_recipes_form_add_validate($form, &$form_state) {
-	//
+	if (valid_email_address($form_state['values']['author_email']) === FALSE){
+    form_set_error('author_email', t('You must enter a valid e-mail address'));
+  }
+
+  if (strlen($form_state['values']['description']) > 500){
+    form_set_error('description', t('You are not allowed to use more than 500 characters'));
+  }
 }
 
 /**
