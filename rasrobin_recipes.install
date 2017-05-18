@@ -14,12 +14,18 @@ function rasrobin_recipes_schema() {
 	    'fields' => [
 	      'id' => [
 	        'description' => 'The primary identifier for a recipe',
-	        'type' => 'int',
-	        'unsigned' => TRUE,
-	        'not null' => TRUE
+	        'type' => 'serial',
+        	'unsigned' => TRUE,
+        	'not null' => TRUE,
+	      ],
+	      'uid' => [
+			    'description' => 'User id',
+			    'type' => 'int',
+			    'not null' => TRUE,
+			    'default' => 0,
 	      ],
 	    ],
-	  'primary_key' => array('id'),
+	  'primary key' => ['id'],
   ];
 
   return $schema;
