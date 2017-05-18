@@ -22,3 +22,30 @@ function rasrobin_recipes_help($path, $arg) {
     break; 
   }
 }
+
+/**
+ * The form - add recipe form
+ */
+function form_add_recipe($form, &$form_state) {
+  
+  $form['submit'] = [
+    '#type' => 'submit',
+    '#value' => t('Add!'),
+  ];
+  
+  return $form;
+}
+
+/**
+ * Validate - add recipe form
+ */
+function form_add_recipe_validate($form, &$form_state) {
+	//
+}
+
+/**
+ * Submit - add recipe form
+ */
+function form_add_recipe_submit($form, &$form_state) {
+	//
+}
