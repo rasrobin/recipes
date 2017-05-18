@@ -58,7 +58,7 @@ function rasrobin_recipes_form_add($form, &$form_state) {
   ];
 
   $form['author_email'] = [
-    '#type' => 'textfield',
+    '#type' => 'emailfield',
     '#title' => 'Author e-mail',
     '#size' => 20,
     '#maxlength' => 255,
