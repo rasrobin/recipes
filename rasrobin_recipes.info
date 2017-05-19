@@ -2,3 +2,4 @@ name = Rasrobin Recipes
 description = A demo-module for storing recipes.
 core = 7.x
 dependencies[] = drupal:elements
+stylesheets[all][] = rasrobin_recipes.css
