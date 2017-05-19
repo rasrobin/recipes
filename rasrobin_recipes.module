@@ -40,12 +40,34 @@ function rasrobin_recipes_menu() {
   $items['recipe/%rasrobin_recipes_content'] = [
     'title' => 'Recipe', //page title
     'description' => 'View a recipe',
-    'page callback' => 'rasrobin_recipes_page',
+    'page callback' => 'rasrobin_recipes_recipe_view',
     'page arguments' => [1],
     'access arguments' => ['recipe_manage'],
   ];
 
   return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function rasrobin_recipes_theme() {
+  $theme_hooks = array(
+    'rasrobin_recipes' => array(
+      'template' => 'rasrobin_recipes',
+      'variables' => [
+      	'title' => NULL,
+      	'author_name' => NULL,
+      	'author_email' => NULL,
+      	'description' => NULL,
+      	'instructions' => NULL,
+      	'ingredients' => NULL,
+      	'created_on' => NULL,
+      ],
+    ),
+  );
+
+  return $theme_hooks;
 }
 
 /**
@@ -81,8 +103,20 @@ function rasrobin_recipes_content_load($recipe_id) {
  *
  * @param StdClass recipe 
  */
-function rasrobin_recipes_page(StdClass $recipe) {
- 	echo($recipe->title);
+function rasrobin_recipes_recipe_view(StdClass $recipe) {
+ 	$recipe_page['rasrobin_recipes_arguments'] = [
+ 		'#title' => $recipe->title,
+ 		'#author_name' => $recipe->author_name,
+ 		'#author_email' => $recipe->author_email,
+ 		'#description' => $recipe->description,
+ 		'#instructions' => $recipe->instructions,
+ 		'#ingredients' => $recipe->ingredients,
+ 		'#created_on' => $recipe->created_on,
+    '#theme' => 'rasrobin_recipes',
+    '#weight' => 1,
+  ];
+
+  return $recipe_page;
 }
 
 /**
