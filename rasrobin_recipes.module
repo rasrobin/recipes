@@ -34,10 +34,34 @@ function rasrobin_recipes_menu() {
     'description' => 'Here you can add a recipe',
     'page callback' => 'drupal_get_form', //this is the function that will be called when the page is accessed.  for a form, use drupal_get_form
     'page arguments' => ['rasrobin_recipes_form_add'], //put the name of the form here
-    'access callback' => TRUE
+    'access arguments' => ['recipe_add'],
+  ];
+
+  $items['recipe/%rasrobin_recipes_content'] = [
+    'title' => 'Recipe', //page title
+    'description' => 'View a recipe',
+    'page callback' => 'rasrobin_recipes_page',
+    'page arguments' => [1],
+    'access arguments' => ['recipe_manage'],
   ];
 
   return $items;
+}
+
+/**
+ * Permissions
+ */
+function rasrobin_recipes_permission() {
+  return [
+    'recipe_manage' => [
+      'title' => t('Manage recipes'),
+      'description' => t('Access recipe detail pages'),
+    ],
+    'recipe_add' => [
+      'title' => t('Add recipes'),
+      'description' => t('Being able to add recipes'),
+    ],
+  ];
 }
 
 /**
@@ -127,9 +151,13 @@ function rasrobin_recipes_form_add_submit($form, &$form_state) {
 	$values['uid'] = $user->uid;
 	$values['language'] = $langcode;
 
-  // Here u can insert Your custom form values into your custom table.
-  db_insert('_rasrobin_recipes')->fields($values)->execute();
+	if (user_access('recipe_add')) {
+	  // Here u can insert Your custom form values into your custom table.
+	  db_insert('_rasrobin_recipes')->fields($values)->execute();
+	  drupal_set_message(t('successfully submitted your recipe'), 'status'); 
+	} else {
+		drupal_set_message(t('you do not have enough rights to add recipes'), 'error');
+	}
 
   $form_state['redirect'] = '/';
-  drupal_set_message(t('successfully submitted your recipe'), 'status'); 
 }
