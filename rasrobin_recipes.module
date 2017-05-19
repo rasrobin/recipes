@@ -29,16 +29,16 @@ function rasrobin_recipes_help($path, $arg) {
 function rasrobin_recipes_menu() {
   $items = [];
 
-  $items['recipe/add'] = [ //this creates a URL that will call this form at "recipes/add-recipe"
-    'title' => 'Submit a recipe', //page title
+  $items['recipe/add'] = [
+    'title' => 'Submit a recipe',
     'description' => 'Here you can add a recipe',
-    'page callback' => 'drupal_get_form', //this is the function that will be called when the page is accessed.  for a form, use drupal_get_form
-    'page arguments' => ['rasrobin_recipes_form_add'], //put the name of the form here
+    'page callback' => 'drupal_get_form', 
+    'page arguments' => ['rasrobin_recipes_form_add'],
     'access arguments' => ['recipe_add'],
   ];
 
   $items['recipe/%rasrobin_recipes_content'] = [
-    'title' => 'Recipe', //page title
+    'title' => 'Recipe',
     'description' => 'View a recipe',
     'page callback' => 'rasrobin_recipes_recipe_view',
     'page arguments' => [1],
