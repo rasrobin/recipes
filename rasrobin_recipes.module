@@ -65,6 +65,27 @@ function rasrobin_recipes_permission() {
 }
 
 /**
+ * Connect to database to retrieve a recipe by id
+ *
+ * @param Int recipe_id 
+ * @return StdClass recipe
+ */
+function rasrobin_recipes_content_load($recipe_id) {
+	return db_select('_rasrobin_recipes', 'r')
+		->fields('r')
+		->condition('id', $recipe_id)->execute()->fetchObject();
+}
+
+/**
+ * Page showing a recipe
+ *
+ * @param StdClass recipe 
+ */
+function rasrobin_recipes_page(StdClass $recipe) {
+ 	echo($recipe->title);
+}
+
+/**
  * The form - add recipe form
  */
 function rasrobin_recipes_form_add($form, &$form_state) {
