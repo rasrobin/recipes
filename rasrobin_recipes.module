@@ -45,6 +45,14 @@ function rasrobin_recipes_menu() {
     'access arguments' => ['recipe_manage'],
   ];
 
+  $items['admin/rasrobin_recipes/config-default-mail'] = [
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['rasrobin_recipes_set_default_mail_form'],
+    'access arguments' => ['recipe_manage'],
+    'type' => MENU_CALLBACK,
+    'file' => 'rasrobin_recipes.admin.inc',
+  ];
+
   return $items;
 }
 
@@ -209,10 +217,22 @@ function rasrobin_recipes_form_add_submit($form, &$form_state) {
 	if (user_access('recipe_add')) {
 	  // Here u can insert Your custom form values into your custom table.
 	  db_insert('_rasrobin_recipes')->fields($values)->execute();
-	  drupal_set_message(t('successfully submitted your recipe'), 'status'); 
+	  drupal_set_message(t('successfully submitted your recipe'), 'status');
+    rasrobin_recipes_send_mail();
 	} else {
 		drupal_set_message(t('you do not have enough rights to add recipes'), 'error');
 	}
 
   $form_state['redirect'] = '/';
+}
+
+function rasrobin_recipes_send_mail() {
+  if (valid_email_address(variable_get('rasrobin_recipes_default_mail'))) {
+    drupal_mail(
+      'rasrobin_recipes',
+      'key',
+      variable_get('rasrobin_recipes_default_mail'),
+      $GLOBALS['language_content']->language
+    );
+  }
 }
