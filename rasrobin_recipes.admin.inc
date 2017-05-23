@@ -8,7 +8,7 @@ function rasrobin_recipes_set_default_mail_form($form, &$form_state) {
   $form['rasrobin_recipes_default_mail'] = [
     '#type' => 'emailfield', 
     '#title' => t('Default e-mail for current language'), 
-    '#default_value' => variable_get('rasrobin_recipes_default_mail', 'robinspoelstra+drupal7@gmail.com'),     
+    '#default_value' => variable_get('rasrobin_recipes_default_mail'),     
     '#required' => TRUE,
   ];
 
